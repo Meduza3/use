@@ -18,6 +18,7 @@ public class Main {
         System.out.println("Fight!");
         
         while(true) {
+            System.out.print("Waiting for input... Got: ");
             String firstInput = scanner.nextLine();
 
             if (firstInput.equals("0")) {
