@@ -28,6 +28,7 @@ public class Main {
                 System.out.println("Invalid input. Please enter 0 or 1.");
                 break;
             }
+            System.out.println("The player is at " + player.x_pos);
         }
     }
 
