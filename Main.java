@@ -15,6 +15,10 @@ public class Main {
         String instructions1 = scanner.nextLine();
         Button button1 = new Button(1, instructions1, player);
 
+        System.out.println("Input what instruction you want for button 2: ");
+        String instructions2 = scanner.nextLine();
+        Button button2 = new Button(2, instructions2, player);
+
         System.out.println("Fight!");
         
         while(true) {
@@ -25,8 +29,9 @@ public class Main {
                 button0.run();
             } else if (firstInput.equals("1")) {
                 button1.run();
+            } else if (firstInput.equals("2")){
+                button2.run();
             } else {
-                System.out.println("Invalid input. Please enter 0 or 1.");
                 break;
             }
             System.out.println("The player is at " + player.x_pos);
