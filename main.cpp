@@ -5,7 +5,7 @@
 #include <csignal>
 
 void signalHandler(int signum) {
-    std::cout << RESET << std::endl; // Set color back to default
+    std::cout << std::endl << RESET; // Set color back to default
     exit(signum);
 }
 
@@ -39,7 +39,6 @@ int main () {
         } else {
             break;
         }
-        std::cout << "The player is at " << player.getXPos() << std::endl;
     }
     std::cout << RED << "Invalid input. " << BOLD << "Terminating." << RESET << std::endl;
 }

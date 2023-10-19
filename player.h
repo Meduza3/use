@@ -5,6 +5,10 @@ class Player {
 public:
      void setXPos(double x_pos);
      double getXPos();
+     void setYPos(double y_pos);
+     double getYPos();
+     void setZPos(double z_pos);
+     double getZPos();
 
 private:
     int hp {100};

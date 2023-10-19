@@ -14,7 +14,7 @@
 
 
         void Button::run(){
-            std::cout << RESET << "The button " << BOLD GREEN << id << RESET << " is running: " << instructions << std::endl;
+            std::cout << RESET << "The button " << BOLD GREEN << id << RESET << " is running: " << ITALIC << instructions << RESET << std::endl;
             std::istringstream iss(instructions);
             std::vector<std::string> actions(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
 
@@ -25,6 +25,12 @@
                     i++;
                 } else if(actions[i] == "SHOOT") {
                     std::cout << "Evaluating " << BLUE << "\"SHOOT\"" << RESET << ": Shooting!" << std::endl;
+                } else if(actions[i] == "PRINT") {
+                    std::cout << "Evaluating " << BLUE << "\"PRINT " << actions[i+1] << "\"" << RESET << ": ";
+                    if(actions[i+1] == "POS"){
+                        std::cout << "Printing: " << BOLD BLUE << "The player is at " << "(" << player.getXPos() << ", " << player.getYPos() << ", " << player.getZPos() << ")" << RESET << std::endl;
+                    }
+                    i++;
                 }
             }
         
