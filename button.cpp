@@ -23,8 +23,8 @@
                     player.setXPos(player.getXPos() + std::stoi(actions[i+1]));
                     std::cout << "Evaluating " << BLUE << "\"MOVE " << actions[i+1] << "\"" << RESET << ": Moving player by " << actions[i+1] << std::endl;
                     i++;
-                } else if(actions[i] == "SHOOT") {
-                    std::cout << "Evaluating " << BLUE << "\"SHOOT\"" << RESET << ": Shooting!" << std::endl;
+                } else if(actions[i] == "PUNCH") {
+                    std::cout << "Evaluating " << BLUE << "\"PUNCH\"" << RESET << ": Punching!" << std::endl;
                 } else if(actions[i] == "PRINT") {
                     std::cout << "Evaluating " << BLUE << "\"PRINT " << actions[i+1] << "\"" << RESET << ": ";
                     if(actions[i+1] == "POS"){

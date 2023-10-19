@@ -75,6 +75,8 @@
         "cfenv": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
-    }
+        "variant": "cpp",
+        "csignal": "cpp"
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/g++"
 }
