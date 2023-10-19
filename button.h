@@ -22,7 +22,7 @@ public:
 private:
     int id;
     std::string instructions;
-    Player player;
+    Player& player;
 };
 
 #endif // BUTTON_H

@@ -8,11 +8,10 @@
 
 
 
-        Button::Button(int id, std::string instructions, Player& player) {
-            this->id = id;
-            this->instructions = instructions;
-            this->player = player;
+        Button::Button(int id, std::string instructions, Player& player)
+                    : id(id), instructions(instructions), player(player) {
         }
+
 
         void Button::run(){
             std::cout << RESET << "The button " << BOLD GREEN << id << RESET << " is running: " << instructions << std::endl;
