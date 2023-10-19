@@ -4,6 +4,7 @@
 #include <string>
 #include <csignal>
 #include "compiler.h"
+#include <fstream>
 
 void signalHandler(int signum) {
     std::cout << std::endl << RESET; // Set color back to default
@@ -20,6 +21,14 @@ int main () {
     std::cout << "Input what instruction you want for button 0:" << std::endl;
     std::string instructions0;
     std::getline(std::cin, instructions0);
+    if(instructions0[0] == '/'){
+        std::ifstream inputFile(instructions0.substr(1));
+        if (inputFile.is_open()) {
+            std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
+            inputFile.close();
+            instructions0 = contents; // Pass contents to function
+        }
+    }
     if(Compiler::validate(instructions0) < 0){
         std::cout << RED << "USElang syntax error. " << "Terminating with error code " << BOLD << Compiler::validate(instructions0) << RESET << std::endl;
         return -1;
@@ -29,6 +38,14 @@ int main () {
     std::cout << RESET << "Input what instruction you want for button 1:" << std::endl;
     std::string instructions1;
     std::getline(std::cin, instructions1);
+    if(instructions1[0] == '/'){
+        std::ifstream inputFile(instructions1.substr(1));
+        if (inputFile.is_open()) {
+            std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
+            inputFile.close();
+            instructions1 = contents; // Pass contents to function
+        }
+    }
     if(Compiler::validate(instructions1) < 0){
         std::cout << RED << "USElang syntax error. " << "Terminating with error code " << BOLD << Compiler::validate(instructions1) << RESET << std::endl;
         return -1;
