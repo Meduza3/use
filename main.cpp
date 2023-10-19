@@ -1,5 +1,5 @@
-#include "Player.h"
-#include "Button.h"
+#include "player.h"
+#include "button.h"
 #include <iostream>
 #include <string>
 
@@ -36,6 +36,6 @@ int main () {
         } else {
             break;
         }
-        std::cout << "The player is at " << player.x_pos << std::endl;
+        std::cout << "The player is at " << player.getXPos() << std::endl;
     }
 }

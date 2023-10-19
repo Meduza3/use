@@ -4,9 +4,9 @@ FLAGS = -g -c -Wall
 LFLAGS = 
 
 # Source files and object files
-OBJS = Button.o Camera.o Player.o main.o
-SOURCE = Button.cpp Camera.cpp Player.cpp main.cpp
-HEADER = Button.h Player.h
+OBJS = button.o camera.o main.o player.o
+SOURCE = button.cpp camera.cpp main.cpp player.cpp
+HEADER = button.h player.h
 OUT = main
 
 # Libraries

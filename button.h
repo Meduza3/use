@@ -2,7 +2,7 @@
 #define BUTTON_H
 
 #include <string>
-#include "Player.h"
+#include "player.h"
 
 class Button {
 public:

@@ -3,7 +3,8 @@
 #include <sstream>
 #include <vector>
 #include <iterator>
-#include "Button.h"
+#include "button.h"
+#include "player.h"
 
         Button::Button(int id, std::string instructions, Player& player) {
             this->id = id;
@@ -18,7 +19,7 @@
 
             for(size_t i = 0; i < actions.size(); i++){
                 if(actions[i] == "MOVE") {
-                    player.x_pos = player.x_pos + std::stoi(actions[i+1]);
+                    player.setXPos(std::stoi(actions[i+1]));
                     std::cout << "Evaluating \"MOVE \" " << actions[i+1] << "\": Moving player by " << actions[i+1] << std::endl;
                     i++;
                 } else if(actions[i] == "SHOOT") {
