@@ -2,11 +2,19 @@
 #include "button.h"
 #include <iostream>
 #include <string>
+#include <csignal>
+
+void signalHandler(int signum) {
+    std::cout << RESET << std::endl; // Set color back to default
+    exit(signum);
+}
 
 int main () {
 
     Player player;
     std::cout << RESET;
+
+    signal(SIGINT, signalHandler); // Handle Ctrl+C
 
     std::cout << "Input what instruction you want for button 0:" << std::endl;
     std::string instructions0;
