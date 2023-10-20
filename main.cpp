@@ -14,8 +14,12 @@ void signalHandler(int signum) {
 
 int main () {
 
-    //sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    //window.display();
+    sf::RenderWindow window(sf::VideoMode(400, 300), "SFML works!");
+
+    sf::View view(sf::Vector2f(0, 0), sf::Vector2f(400, 300));
+    window.setView(view);
+
+    window.display();
 
     Player player;
     std::cout << RESET;
@@ -62,6 +66,7 @@ int main () {
     std::cout << BOLD << "Fight!" << RESET << std::endl;
     
     while(true) {
+
         std::cout << "Waiting for input... Got: " << RED;
         std::string firstInput;
         std::getline(std::cin, firstInput);
@@ -72,6 +77,11 @@ int main () {
         } else {
             break;
         }
+        window.clear();
+        sf::CircleShape circle(20);
+        circle.setPosition(player.getXPos(), player.getYPos());
+        window.draw(circle);
+        window.display();
     }
     std::cout << RED << "Invalid input. " << BOLD << "Terminating." << RESET << std::endl;
 }
