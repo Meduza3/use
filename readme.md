@@ -34,7 +34,7 @@ Examples:
 
 * ```MOVE X 10 PUNCH PUNCH```: Moves the player and punches twice.
 
- * ```MOVE Y -15 PRINT POS SHOOT MOVE Z 20```: Moves the player, prints the position, moves the player again.
+ * ```MOVE Y -15 PRINT POS PUNCH MOVE Z 20```: Moves the player, prints the position, punches and moves the player again.
 
 ### Bind with premade .use files
 
