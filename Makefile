@@ -1,7 +1,7 @@
 # Compiler and flags
 CC = g++
 FLAGS = -g -c -Wall
-LFLAGS = 
+LFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
 # Source files and object files
 OBJS = button.o camera.o compiler.o main.o player.o

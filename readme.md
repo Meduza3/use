@@ -4,6 +4,12 @@ The future of e-sports
 
 ## Installation
 
+Install SFML.
+
+On Arch Linux:
+
+  ```$> yay -S sfml```
+
 Using g++
 
  ```$> make```

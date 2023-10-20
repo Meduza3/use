@@ -5,6 +5,7 @@
 #include <csignal>
 #include "compiler.h"
 #include <fstream>
+#include <SFML/Graphics.hpp>
 
 void signalHandler(int signum) {
     std::cout << std::endl << RESET; // Set color back to default
@@ -12,6 +13,9 @@ void signalHandler(int signum) {
 }
 
 int main () {
+
+    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    window.display();
 
     Player player;
     std::cout << RESET;
