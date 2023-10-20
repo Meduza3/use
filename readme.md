@@ -27,4 +27,6 @@ Examples:
 
  * ```MOVE -15 PRINT POS SHOOT MOVE 20```: Moves the player, prints the position, moves the player again.
 
+### Bind with premade .use files
+
  * ```/example1.use```: Reads the contents of the 1st example
