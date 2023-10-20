@@ -19,6 +19,8 @@ int main () {
     signal(SIGINT, signalHandler); // Handle Ctrl+C
 
     std::cout << "Input what instruction you want for button 0:" << std::endl;
+
+
     std::string instructions0;
     std::getline(std::cin, instructions0);
     if(instructions0[0] == '/'){
@@ -34,6 +36,7 @@ int main () {
         return -1;
     }
     Button button0 = Button(0, instructions0, player);
+
 
     std::cout << RESET << "Input what instruction you want for button 1:" << std::endl;
     std::string instructions1;
@@ -52,7 +55,7 @@ int main () {
     }
     Button button1 = Button(1, instructions1, player);
 
-    std::cout << "Fight!" << std::endl;
+    std::cout << BOLD << "Fight!" << RESET << std::endl;
     
     while(true) {
         std::cout << "Waiting for input... Got: " << RED;
