@@ -14,8 +14,8 @@ void signalHandler(int signum) {
 
 int main () {
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    window.display();
+    //sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    //window.display();
 
     Player player;
     std::cout << RESET;

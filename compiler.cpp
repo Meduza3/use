@@ -5,8 +5,12 @@ int Compiler::validate(std::string code){
     std::vector<std::string> words(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
     for(size_t i = 0; i < words.size(); i++){
         if(words[i] == "MOVE") {
+            if(words[i+1] != "X" && words[i+1] != "Y" && words[i+1] != "Z"){
+                return -5;
+            }
             try {
-                double value = std::stod(words[i+1]);
+                double value = std::stod(words[i+2]);
+                i++;
                 i++;
             } catch (std::invalid_argument const &e) {
                 return -1;

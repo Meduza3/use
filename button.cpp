@@ -20,8 +20,15 @@
 
             for(size_t i = 0; i < actions.size(); i++){
                 if(actions[i] == "MOVE") {
-                    player.setXPos(player.getXPos() + std::stoi(actions[i+1]));
-                    std::cout << "Evaluating " << BLUE << "\"MOVE " << actions[i+1] << "\"" << RESET << ": Moving player by " << actions[i+1] << std::endl;
+                    if(actions[i+1] == "X"){
+                        player.setXPos(player.getXPos() + std::stoi(actions[i+2]));
+                    } else if(actions[i+1] == "Y"){
+                        player.setYPos(player.getYPos() + std::stoi(actions[i+2]));
+                    } else if(actions[i+1] == "Z"){
+                        player.setZPos(player.getZPos() + std::stoi(actions[i+2]));
+                    }
+                    std::cout << "Evaluating " << BLUE << "\"MOVE " << actions[i+1] << " " << actions[i+2] << "\"" << RESET << ": Moving player by " << actions[i+2] << " in " << actions[i+1] << std::endl;
+                    i++;
                     i++;
                 } else if(actions[i] == "PUNCH") {
                     std::cout << "Evaluating " << BLUE << "\"PUNCH\"" << RESET << ": Punching!" << std::endl;

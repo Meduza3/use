@@ -21,17 +21,20 @@ Using g++
 ## USElang syntax
 
 ### Write your own code
-Nullary function ```PUNCH``` Punch.
+Nullary function ```PUNCH```:
+    Punch.
 
-Unary functions ```MOVE``` and ```PRINT```:
-    MOVE takes a double parameter and moves the player along the x-axis.
+Unary function ```PRINT```:
     PRINT currently only takes POS as a parameter and prints the current player position.
+
+Binary function ```MOVE```:
+    MOVE takes X, Y or Z as the first parameter and then a double value for the distance.
 
 Examples:
 
-* ```MOVE 10 PUNCH PUNCH```: Moves the player and punches twice.
+* ```MOVE X 10 PUNCH PUNCH```: Moves the player and punches twice.
 
- * ```MOVE -15 PRINT POS SHOOT MOVE 20```: Moves the player, prints the position, moves the player again.
+ * ```MOVE Y -15 PRINT POS SHOOT MOVE Z 20```: Moves the player, prints the position, moves the player again.
 
 ### Bind with premade .use files
 
