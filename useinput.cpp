@@ -3,18 +3,18 @@
 #include <sstream>
 #include <vector>
 #include <iterator>
-#include "button.h"
+#include "useinput.h"
 #include "player.h"
 
 
 
-        Button::Button(int id, std::string instructions, Player& player)
+        USEinput::USEinput(int id, std::string instructions, Player& player)
                     : id(id), instructions(instructions), player(player) {
         }
 
 
-        void Button::run(){
-            std::cout << RESET << "The button " << BOLD GREEN << id << RESET << " is running: " << ITALIC << instructions << RESET << std::endl;
+        void USEinput::run(){
+            std::cout << RESET << "The UseInput " << BOLD GREEN << id << RESET << " is running: " << ITALIC << instructions << RESET << std::endl;
             std::istringstream iss(instructions);
             std::vector<std::string> actions(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
 

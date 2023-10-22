@@ -16,15 +16,15 @@
 #include <string>
 #include "player.h"
 
-class Button {
-public:
-    Button(int id, std::string instructions, Player& player);
-    void run();
+class USEinput {
+    public:
+        USEinput(int id, std::string instructions, Player& player);
+        void run();
 
-private:
-    int id;
-    std::string instructions;
-    Player& player;
+    private:
+        int id;
+        std::string instructions;
+        Player& player;
 };
 
 #endif // BUTTON_H
