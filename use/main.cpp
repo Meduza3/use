@@ -4,10 +4,20 @@
 #include <string>
 #include <csignal>
 #include "compiler.h"
+#include "userInputHandler.h"
 #include <fstream>
 #include <thread>
 #include <chrono>
 #include <SFML/Graphics.hpp>
+#if defined(_WIN32) || defined(_WIN64)
+    // Code specific to Windows
+    #include <Windows.h>
+#elif defined(__linux__) || defined(__unix__) || defined(__APPLE__)
+    // Code specific to Linux, Unix, or macOS
+    #include <X11/Xlib.h>
+    #undef None
+#endif
+
 
 void signalHandler(int signum) {
     std::cout << std::endl << RESET; // Set color back to default
@@ -25,40 +35,45 @@ void eventHandler(sf::RenderWindow& window, bool& isRunning) {
     }
 }
 
-void userInputHandler(Player& player, USEinput& button0, USEinput& button1, sf::RenderWindow& window) {
-    auto lastRunTime = std::chrono::high_resolution_clock::now();
-
-    while(true){
-        auto currentTime = std::chrono::high_resolution_clock::now();
-        if(window.hasFocus()){
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num0)){
-                auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastRunTime).count();
-                if(elapsedTime >= 15){
-                    button0.run();
-                    lastRunTime = currentTime;
-                }
-            } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)){
-                auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastRunTime).count();
-                if(elapsedTime >= 15){
-                    button1.run();
-                    lastRunTime = currentTime;
-                }
-            }   
-        }
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(20)); // Add a small delay to avoid high CPU usage
-    }
-}
-
-
 int main () {
+    sf::Texture texture;
+    texture.loadFromFile("img/splash.png");
+    sf::RenderWindow splash(sf::VideoMode(texture.getSize().x, texture.getSize().y), "USE Skill Engine", sf::Style::None);
+    
+    #if defined(_WIN32) || defined(_WIN64)
+        int screen_width = GetSystemMetrics(SM_CXSCREEN);
+        int screen_height = GetSystemMetrics(SM_CYSCREEN);
+    #elif defined(__linux__) || defined(__unix__) || defined(__APPLE__)
+        Display* d = XOpenDisplay(NULL);
+        Screen* screen = XScreenOfDisplay(d, DefaultScreen(d));
+
+        int screen_width = WidthOfScreen(screen);
+        int screen_height = HeightOfScreen(screen);
+
+        XCloseDisplay(d);
+    #endif
+
+    int splash_x = (screen_width - splash.getSize().x) / 2;
+    int splash_y = (screen_height - splash.getSize().y) / 2;
+
+    splash.setPosition(sf::Vector2i(splash_x, splash_y));
+
+    sf::Sprite sprite(texture);
+    splash.draw(sprite);
+    splash.display();
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    splash.close();
+
+
 
     sf::RenderWindow window(sf::VideoMode(400, 300), "USE Skill Engine", sf::Style::Default);
 
     sf::View view(sf::Vector2f(0, 0), sf::Vector2f(400, 300));
     window.setView(view);
     bool isRunning = true;
-
+    sf::CircleShape circle(20);
+    circle.setPosition(0, 0);
+    window.draw(circle);
     window.display();
 
 
