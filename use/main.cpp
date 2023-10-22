@@ -35,15 +35,18 @@ void eventHandler(sf::RenderWindow& window, bool& isRunning) {
     }
 }
 
-int main () {
+void splash(){
     sf::Texture texture;
     texture.loadFromFile("img/splash.png");
     sf::RenderWindow splash(sf::VideoMode(texture.getSize().x, texture.getSize().y), "USE Skill Engine", sf::Style::None);
     
     #if defined(_WIN32) || defined(_WIN64)
+
         int screen_width = GetSystemMetrics(SM_CXSCREEN);
         int screen_height = GetSystemMetrics(SM_CYSCREEN);
+
     #elif defined(__linux__) || defined(__unix__) || defined(__APPLE__)
+
         Display* d = XOpenDisplay(NULL);
         Screen* screen = XScreenOfDisplay(d, DefaultScreen(d));
 
@@ -51,6 +54,7 @@ int main () {
         int screen_height = HeightOfScreen(screen);
 
         XCloseDisplay(d);
+
     #endif
 
     int splash_x = (screen_width - splash.getSize().x) / 2;
@@ -65,6 +69,12 @@ int main () {
     splash.close();
 
 
+
+}
+
+int main () {
+    
+    splash();
 
     sf::RenderWindow window(sf::VideoMode(400, 300), "USE Skill Engine", sf::Style::Default);
 
