@@ -79,6 +79,13 @@ int main () {
             inputFile.close();
             instructions0 = contents; // Pass contents to function
         }
+    } else if (instructions0 == ""){
+        std::ifstream inputFile("uselang_examples/example0.use");
+        if (inputFile.is_open()) {
+            std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
+            inputFile.close();
+            instructions0 = contents; // Pass contents to function
+        }
     }
     if(Compiler::validate(instructions0) < 0){
         std::cout << RED << "USElang syntax error. " << "Terminating with error code " << BOLD << Compiler::validate(instructions0) << RESET << std::endl;
@@ -92,6 +99,13 @@ int main () {
     std::getline(std::cin, instructions1);
     if(instructions1[0] == '/'){
         std::ifstream inputFile(instructions1.substr(1));
+        if (inputFile.is_open()) {
+            std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
+            inputFile.close();
+            instructions1 = contents; // Pass contents to function
+        }
+    } else if (instructions1 == ""){
+        std::ifstream inputFile("uselang_examples/example1.use");
         if (inputFile.is_open()) {
             std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
             inputFile.close();

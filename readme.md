@@ -38,4 +38,5 @@ Examples:
 
 ### Bind with premade .use files
 
- * ```/example1.use```: Reads the contents of the 1st example
+ * ```/uselang_examples/example1.use```: Reads the contents of the 1st example
+ * Without input examples 0 and 1 are automaticaly loaded to their respective UseInputs.

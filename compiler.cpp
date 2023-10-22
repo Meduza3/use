@@ -3,6 +3,9 @@
 int Compiler::validate(std::string code){
     std::istringstream iss(code);
     std::vector<std::string> words(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
+    if(words.size() == 0){
+        return -100;
+    }
     for(size_t i = 0; i < words.size(); i++){
         if(words[i] == "MOVE") {
             if(words[i+1] != "X" && words[i+1] != "Y" && words[i+1] != "Z"){
