@@ -9,6 +9,7 @@
 #include <thread>
 #include <chrono>
 #include <SFML/Graphics.hpp>
+#include <vector>
 #if defined(_WIN32) || defined(_WIN64)
     // Code specific to Windows
     #include <Windows.h>
@@ -93,61 +94,55 @@ int main () {
 
     signal(SIGINT, signalHandler); // Handle Ctrl+C
 
-    std::cout << "Input what instruction you want for UseInput 0:" << std::endl;
+    //Array of UseInputs
+    std::vector<USEinput> useInputs;
+    while(true){
+        std::cout << "If you'd like to add a UseInput, type add. To fight, type something else." << std::endl;
+        std::string input;
+        std::getline(std::cin, input);
+        if(input == "add"){
 
+            std::cout << "Press the button you'd like to bind to the UseInput." << std::endl;
+            std::string button;
+            std::getline(std::cin, button);
+            sf::Keyboard::Key key = static_cast<sf::Keyboard::Key>(button[0]);
 
-    std::string instructions0;
-    std::getline(std::cin, instructions0);
-    if(instructions0[0] == '/'){
-        std::ifstream inputFile(instructions0.substr(1));
-        if (inputFile.is_open()) {
-            std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
-            inputFile.close();
-            instructions0 = contents; // Pass contents to function
-        }
-    } else if (instructions0 == ""){
-        std::ifstream inputFile("uselang_examples/example0.use");
-        if (inputFile.is_open()) {
-            std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
-            inputFile.close();
-            instructions0 = contents; // Pass contents to function
-        }
-    }
-    if(Compiler::validate(instructions0) < 0){
-        std::cout << RED << "USElang syntax error. " << "Terminating with error code " << BOLD << Compiler::validate(instructions0) << RESET << std::endl;
-        return -1;
-    }
-    USEinput button0 = USEinput(0, instructions0, player);
+            std::cout << "Input what instruction you want for UseInput " << useInputs.size() << ":" << std::endl;
+            std::string instructions;
+            std::getline(std::cin, instructions);
+            if(instructions[0] == '/'){
+                std::ifstream inputFile(instructions.substr(1));
+                if (inputFile.is_open()) {
+                    std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
+                    inputFile.close();
+                    instructions = contents; // Pass contents to function
+                }
+            } else if (instructions == ""){
+                std::ifstream inputFile("uselang_examples/example1.use");
+                if (inputFile.is_open()) {
+                    std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
+                    inputFile.close();
+                    instructions = contents; // Pass contents to function
+                }
+            }
+            if(Compiler::validate(instructions) < 0){
+                std::cout << RED << "USElang syntax error. " << "Terminating with error code " << BOLD << Compiler::validate(instructions) << RESET << std::endl;
+                return -1;
+            }
 
-
-    std::cout << RESET << "Input what instruction you want for UseInput 1:" << std::endl;
-    std::string instructions1;
-    std::getline(std::cin, instructions1);
-    if(instructions1[0] == '/'){
-        std::ifstream inputFile(instructions1.substr(1));
-        if (inputFile.is_open()) {
-            std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
-            inputFile.close();
-            instructions1 = contents; // Pass contents to function
-        }
-    } else if (instructions1 == ""){
-        std::ifstream inputFile("uselang_examples/example1.use");
-        if (inputFile.is_open()) {
-            std::string contents((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
-            inputFile.close();
-            instructions1 = contents; // Pass contents to function
+            useInputs.push_back(USEinput(key, instructions, player));
+        } else {
+            break;
         }
     }
-    if(Compiler::validate(instructions1) < 0){
-        std::cout << RED << "USElang syntax error. " << "Terminating with error code " << BOLD << Compiler::validate(instructions1) << RESET << std::endl;
-        return -1;
-    }
-    USEinput button1 = USEinput(1, instructions1, player);
 
     std::cout << BOLD << "Fight!" << RESET << std::endl;
-
+    std::cout << useInputs.size() << std::endl;
+    for (int i = 0; i < useInputs.size(); ++i) {
+        std::cout << useInputs[i].getId() << " " << useInputs[i].getInstructions() << std::endl;
+    }
     std::thread eventThread(eventHandler, std::ref(window), std::ref(isRunning));
-    std::thread inputThread(userInputHandler, std::ref(player), std::ref(button0), std::ref(button1), std::ref(window));
+    std::thread inputThread(userInputHandler, std::ref(player), useInputs, std::ref(window));
 
 
     while(isRunning) {

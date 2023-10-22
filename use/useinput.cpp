@@ -8,8 +8,8 @@
 
 
 
-        USEinput::USEinput(int id, std::string instructions, Player& player)
-                    : id(id), instructions(instructions), player(player) {
+        USEinput::USEinput(char id, std::string instructions, Player& player)
+                    : id(std::toupper(id)), instructions(instructions), player(player) {
         }
 
 

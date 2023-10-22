@@ -18,11 +18,13 @@
 
 class USEinput {
     public:
-        USEinput(int id, std::string instructions, Player& player);
+        USEinput(char id, std::string instructions, Player& player);
         void run();
+        char getId() const { return id; }
+        std::string getInstructions() const{ return instructions;}
 
     private:
-        int id;
+        char id;
         std::string instructions;
         Player& player;
 };
