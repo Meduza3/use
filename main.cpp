@@ -5,6 +5,7 @@
 #include <csignal>
 #include "compiler.h"
 #include <fstream>
+#include <thread>
 #include <SFML/Graphics.hpp>
 
 void signalHandler(int signum) {
@@ -12,14 +13,39 @@ void signalHandler(int signum) {
     exit(signum);
 }
 
+void eventHandler(sf::RenderWindow& window, bool& isRunning) {
+    while(isRunning) {
+        sf::Event event;
+        while(window.pollEvent(event)) {
+            if(event.type == sf::Event::Closed){
+                isRunning = false;
+            }
+        }
+    }
+}
+
+void userInputHandler(Player& player, Button& button0, Button& button1) {
+    while(true){
+        std::cout << "Waiting for input... Got: " << RED;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num0)){
+            button0.run();
+        } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)){
+            button1.run();
+        }
+    }
+}
+
 int main () {
 
-    sf::RenderWindow window(sf::VideoMode(400, 300), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(400, 300), "SFML works!", sf::Style::Default);
 
     sf::View view(sf::Vector2f(0, 0), sf::Vector2f(400, 300));
     window.setView(view);
+    bool isRunning = true;
 
     window.display();
+
+
 
     Player player;
     std::cout << RESET;
@@ -64,24 +90,20 @@ int main () {
     Button button1 = Button(1, instructions1, player);
 
     std::cout << BOLD << "Fight!" << RESET << std::endl;
-    
-    while(true) {
 
-        std::cout << "Waiting for input... Got: " << RED;
-        std::string firstInput;
-        std::getline(std::cin, firstInput);
-        if (firstInput == "0") {
-            button0.run();
-        } else if (firstInput == "1") {
-            button1.run();
-        } else {
-            break;
-        }
+    std::thread eventThread(eventHandler, std::ref(window), std::ref(isRunning));
+    std::thread inputThread(userInputHandler, std::ref(player), std::ref(button0), std::ref(button1));
+
+
+    while(isRunning) {
         window.clear();
         sf::CircleShape circle(20);
         circle.setPosition(player.getXPos(), player.getYPos());
         window.draw(circle);
         window.display();
     }
+
+    inputThread.join();
+    eventThread.join();
     std::cout << RED << "Invalid input. " << BOLD << "Terminating." << RESET << std::endl;
 }
