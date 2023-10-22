@@ -4,9 +4,9 @@ FLAGS = -g -c -Wall
 LFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
 # Source files and object files
-OBJS = useinput.o camera.o compiler.o main.o player.o
-SOURCE = useinput.cpp camera.cpp compiler.cpp main.cpp player.cpp
-HEADER = useinput.h compiler.h player.h
+OBJS = use/useinput.o use/camera.o use/compiler.o use/main.o use/player.o
+SOURCE = use/useinput.cpp use/camera.cpp use/compiler.cpp use/main.cpp use/player.cpp
+HEADER = use/useinput.h use/compiler.h use/player.h
 OUT = main
 
 # Libraries
